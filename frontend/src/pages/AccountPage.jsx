@@ -590,10 +590,23 @@ const AccountPage = () => {
             {/* ADMIN VIEW: TAMBAH PRODUK */}
             {activeTab === 'add-product' && userInfo.isAdmin && (
               <div className="bg-white p-6 md:p-10 rounded-[2.5rem] shadow-xl shadow-gray-200/50 border border-gray-100 animate-in slide-in-from-bottom-4">
-                <div className="flex items-center justify-between mb-10">
+                <div className="flex items-center justify-between mb-8">
                   <h2 className="text-2xl font-black text-gray-900 tracking-tight">{editingProductId ? '✏️ Update Produk' : '➕ Produk Baru'}</h2>
                   {editingProductId && <button onClick={() => { setProductForm(emptyForm); setEditingProductId(null); }} className="text-xs font-black text-red-500 uppercase tracking-widest hover:underline">Batal</button>}
                 </div>
+
+                {productSuccess && (
+                  <div className="mb-8 p-5 bg-green-50 border border-green-100 rounded-3xl flex items-center gap-4 animate-in zoom-in duration-300">
+                    <div className="w-10 h-10 bg-green-500 text-white rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-green-100">
+                      <CheckCircle size={20} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-black text-green-800 uppercase tracking-tight">Berhasil!</p>
+                      <p className="text-xs text-green-600 font-bold uppercase tracking-widest">Produk telah {editingProductId ? 'diperbarui' : 'ditambahkan ke katalog'}.</p>
+                    </div>
+                  </div>
+                )}
+
                 <form onSubmit={submitProduct} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2 space-y-2">
                     <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">Nama Produk Komplit</label>
@@ -617,7 +630,36 @@ const AccountPage = () => {
                   </div>
                   <div className="md:col-span-2 space-y-2">
                     <label className="text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">Deskripsi Singkat</label>
-                    <textarea required rows="3" value={productForm.description} onChange={e => setProductForm({...productForm, description: e.target.value})} className="w-full px-6 py-4 bg-gray-50 border-2 border-gray-50 rounded-2xl font-bold focus:border-indigo-500 focus:bg-white outline-none resize-none" />
+                    <textarea required rows="3" value={productForm.description} onChange={e => setProductForm({...productForm, description: e.target.value})} className="w-full px-6 py-4 bg-gray-50 border-2 border-gray-50 rounded-2xl font-bold focus:border-indigo-500 focus:bg-white outline-none resize-none transition-all" />
+                  </div>
+
+                  {/* ── SPESIFIKASI TEKNIS ── */}
+                  <div className="md:col-span-2 mt-4">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="h-px bg-gray-100 flex-1"></div>
+                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-4 py-1.5 bg-gray-50 rounded-full border border-gray-100">Spesifikasi Detail</span>
+                      <div className="h-px bg-gray-100 flex-1"></div>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {[
+                        { k: 'ram', l: 'RAM', p: '8GB / 12GB' },
+                        { k: 'storage', l: 'Internal', p: '128GB / 256GB' },
+                        { k: 'processor', l: 'Chipset', p: 'A17 Pro / Gen 3' },
+                        { k: 'screen', l: 'Layar', p: '6.7" OLED' },
+                        { k: 'battery', l: 'Baterai', p: '5000 mAh' },
+                      ].map(s => (
+                        <div key={s.k} className="space-y-1.5">
+                          <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">{s.l}</label>
+                          <input
+                            type="text"
+                            placeholder={s.p}
+                            value={productForm.specifications[s.k]}
+                            onChange={e => setSpec(s.k, e.target.value)}
+                            className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-xs font-bold focus:border-indigo-500 focus:bg-white outline-none"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <button type="submit" disabled={productLoading} className="md:col-span-2 mt-4 bg-indigo-600 text-white font-black py-5 rounded-2xl hover:bg-indigo-700 transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-100">
                     {productLoading ? <Loader2 className="animate-spin" /> : <Save size={20} />}
