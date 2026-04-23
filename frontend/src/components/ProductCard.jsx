@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
     if (window.confirm('Hapus produk ini?')) {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-        await axios.delete(`http://localhost:5000/api/products/${product._id}`, config);
+        await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products/${product._id}`, config);
         alert('Produk berhasil dihapus');
         setIsModalOpen(false);
         window.location.reload(); 

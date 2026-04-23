@@ -16,7 +16,7 @@ const SuccessPage = () => {
     const fetchOrder = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo?.token}` } };
-        const { data } = await axios.get(`http://localhost:5000/api/orders/${orderId}`, config);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/orders/${orderId}`, config);
         setOrder(data);
       } catch (err) {
         console.error(err);

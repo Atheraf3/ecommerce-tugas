@@ -71,7 +71,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="pt-8 border-t border-gray-800 text-center text-sm flex flex-col md:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} GPhone E-Commerce. All rights reserved.</p>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap justify-center md:justify-end gap-2">
             {/* Dummy Payment Badges */}
             <div className="bg-gray-800 text-xs px-3 py-1 rounded text-gray-300 font-bold border border-gray-700">Debit</div>
             <div className="bg-gray-800 text-xs px-3 py-1 rounded text-gray-300 font-bold border border-gray-700">Kredit</div>

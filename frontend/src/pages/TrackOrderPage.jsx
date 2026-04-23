@@ -74,7 +74,7 @@ const TrackOrderPage = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
       const { data } = await axios.get(
-        `http://localhost:5000/api/orders/track/${shortId}`,
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/orders/track/${shortId}`,
         config
       );
       setResult(data);

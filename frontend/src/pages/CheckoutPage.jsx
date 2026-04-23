@@ -45,11 +45,11 @@ const StepBar = ({ current }) => (
       return (
         <React.Fragment key={i}>
           <div className="flex flex-col items-center">
-            <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all
+            <div className={`w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center font-bold text-xs md:text-sm transition-all
               ${done ? 'bg-blue-600 text-white' : active ? 'bg-blue-600 text-white ring-4 ring-blue-100' : 'bg-gray-100 text-gray-400'}`}>
               {done ? <CheckCircle size={16} /> : i + 1}
             </div>
-            <span className={`text-xs mt-1.5 font-semibold ${active ? 'text-blue-600' : done ? 'text-blue-500' : 'text-gray-400'}`}>
+            <span className={`hidden sm:block text-[10px] md:text-xs mt-1.5 font-semibold ${active ? 'text-blue-600' : done ? 'text-blue-500' : 'text-gray-400'}`}>
               {label}
             </span>
           </div>
@@ -140,7 +140,7 @@ const CheckoutPage = () => {
       if (!userInfo) return;
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-        const { data } = await axios.get('http://localhost:5000/api/users/profile', config);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/users/profile`, config);
         if (data.address) {
           setAddress(prev => ({
             name: prev.name || userInfo.name || '',
@@ -239,7 +239,7 @@ const CheckoutPage = () => {
         paymentMethod: selectedPayment.label,
         totalPrice: total,
       };
-      const { data } = await axios.post('http://localhost:5000/api/orders', payload, config);
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/orders`, payload, config);
       clearCart();
       navigate(`/success/${data._id}`);
     } catch (err) {
