@@ -35,7 +35,7 @@ const LoginPage = () => {
 
         <form onSubmit={submitHandler} className="space-y-6">
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">SUREL (Email)</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Email</label>
             <div className="relative">
               <Mail className="absolute left-3 top-3 text-gray-400" size={20} />
               <input 
