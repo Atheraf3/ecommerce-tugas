@@ -13,7 +13,7 @@ const AboutPage = () => {
       <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
         <div>
           <img 
-            src="https://ik.imagekit.io/2xthk8ud4/Ecommerce%20HP/CEO.jpg?q=80&w=1000&auto=format&fit=crop" 
+            src="https://ik.imagekit.io/2xthk8ud4/Ecommerce%20HP/Profile.png?q=80&w=1000&auto=format&fit=crop" 
             alt="Tim Pengembang" 
             className="rounded-3xl shadow-xl rotate-[-2deg] transition-transform hover:rotate-0 duration-500"
           />
